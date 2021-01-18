@@ -1,0 +1,34 @@
+class Solution{
+     public int helpaterp(int[][] h) {
+        Queue<int[]> q = new LinkedList();
+        int c = 0;
+        for (int i = 0; i < h.length; i++){
+            for (int j = 0; j <h[0].length; j++){
+                if (h[i][j] == 2)
+                    q.add(new int[]{i, j});
+                if (h[i][j] == 1)
+                    c ++;
+            }
+        }
+        int time = 0;
+        int [][] directions = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+        while(!q.isEmpty() && c > 0){
+            time ++;
+            int size = q.size();
+            while(size > 0){
+                int [] xy = q.poll();
+                for(int [] d : directions){
+                    int x = xy[0] + d[0];
+                    int y = xy[1] + d[1];
+                    if (x < 0 || y < 0 || x >= h.length || y >= h[0].length || h[x][y] == 0 || h[x][y] == 2)
+                        continue;
+                    q.add(new int []{x, y});
+                    h[x][y] = 2;
+                    c --;
+                } 
+                size --;
+            }
+        }
+        return c == 0 ? time : -1;
+    }
+}
