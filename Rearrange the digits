@@ -1,0 +1,11 @@
+class Solution:
+    def smallestnum (self,N):
+        l=list(str(N))
+        l=sorted(l)
+        a=0
+        for i in range(len(l)):
+            if(l[i]!='0'):
+                a=l.pop(i)
+                break
+        s=str(a)+"".join(l)
+        return int(s)
